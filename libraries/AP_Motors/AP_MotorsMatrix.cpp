@@ -1287,6 +1287,88 @@ bool AP_MotorsMatrix::setup_deca_matrix(motor_frame_type frame_type)
 }
 #endif // AP_MOTORS_FRAME_DECA_ENABLED
 
+bool AP_MotorsMatrix::setup_custome24_ub_darpa_v2_matrix(motor_frame_type frame_type)
+{
+    (void)frame_type;
+    _mav_type = MAV_TYPE_GENERIC;
+    _frame_class_string = "CUSTOME24_UB_DARPA_V2";
+
+#if AP_MOTORS_MAX_NUM_MOTORS < 24
+    _frame_type_string = "UNSUPPORTED";
+    return false;
+#else
+    _frame_type_string = "RAW24";
+    static const AP_MotorsMatrix::MotorDefRaw motors[] {
+        {  0.192f,  0.333f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,   1 },
+        {  0.385f,  0.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CCW,  2 },
+        {  0.192f, -0.333f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,   3 },
+        { -0.193f, -0.333f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW,  4 },
+        { -0.385f,  0.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CW,   5 },
+        { -0.192f,  0.333f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW,  6 },
+        {  0.0f,    0.667f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,   7 },
+        {  0.192f,  1.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CCW,  8 },
+        {  0.385f,  0.667f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW,  9 },
+        {  0.577f,  0.333f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 10 },
+        {  0.77f,   0.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CW,  11 },
+        {  0.962f, -0.333f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 12 },
+        {  0.577f, -0.333f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,  13 },
+        {  0.77f,  -0.667f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 14 },
+        {  0.385f, -0.667f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 15 },
+        {  0.0f,   -0.667f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,  16 },
+        { -0.385f, -0.667f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 17 },
+        { -0.77f,  -0.667f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,  18 },
+        { -0.577f, -0.333f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 19 },
+        { -0.962f, -0.333f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 20 },
+        { -0.77f,   0.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CW,  21 },
+        { -0.577f,  0.333f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 22 },
+        { -0.385f,  0.667f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,  23 },
+        { -0.192f,  1.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CW,  24 },
+    };
+    add_motors_raw(motors, ARRAY_SIZE(motors));
+    return true;
+#endif
+}
+
+bool AP_MotorsMatrix::setup_custome22_ub_darpa_matrix(motor_frame_type frame_type)
+{
+    (void)frame_type;
+    _mav_type = MAV_TYPE_GENERIC;
+    _frame_class_string = "CUSTOME22_UB_DARPA";
+
+#if AP_MOTORS_MAX_NUM_MOTORS < 22
+    _frame_type_string = "UNSUPPORTED";
+    return false;
+#else
+    _frame_type_string = "RAW22";
+    static const AP_MotorsMatrix::MotorDefRaw motors[] {
+        {  0.192f,  0.333f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,   1 },
+        {  0.385f,  0.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CCW,  2 },
+        { -0.192f, -0.333f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW,  3 },
+        { -0.385f,  0.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CW,   4 },
+        {  0.0f,    0.667f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,   5 },
+        {  0.192f,  1.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CW,   6 },
+        {  0.385f,  0.667f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW,  7 },
+        {  0.577f,  0.333f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW,  8 },
+        {  0.77f,   0.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CW,   9 },
+        {  0.962f, -0.333f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 10 },
+        {  0.577f, -0.333f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,  11 },
+        {  0.77f,  -0.667f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,  12 },
+        {  0.385f, -0.667f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 13 },
+        {  0.0f,   -0.667f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 14 },
+        { -0.385f, -0.667f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,  15 },
+        { -0.77f,  -0.667f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 16 },
+        { -0.577f, -0.333f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,  17 },
+        { -0.962f, -0.333f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,  18 },
+        { -0.77f,   0.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 19 },
+        { -0.577f,  0.333f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 20 },
+        { -0.385f,  0.667f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,  21 },
+        { -0.192f,  1.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 22 },
+    };
+    add_motors_raw(motors, ARRAY_SIZE(motors));
+    return true;
+#endif
+}
+
 void AP_MotorsMatrix::setup_motors(motor_frame_class frame_class, motor_frame_type frame_type)
 {
     // remove existing motors
@@ -1332,6 +1414,12 @@ void AP_MotorsMatrix::setup_motors(motor_frame_class frame_class, motor_frame_ty
         success = setup_deca_matrix(frame_type);
         break;
 #endif //AP_MOTORS_FRAME_DECA_ENABLED
+    case MOTOR_FRAME_CUSTOME24_UB_DARPA_V2:
+        success = setup_custome24_ub_darpa_v2_matrix(frame_type);
+        break;
+    case MOTOR_FRAME_CUSTOME22_UB_DARPA:
+        success = setup_custome22_ub_darpa_matrix(frame_type);
+        break;
     default:
         // matrix doesn't support the configured class
         success = false;

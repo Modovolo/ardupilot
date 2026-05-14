@@ -70,6 +70,8 @@ public:
         MOTOR_FRAME_SCRIPTING_MATRIX = 15,
         MOTOR_FRAME_6DOF_SCRIPTING = 16,
         MOTOR_FRAME_DYNAMIC_SCRIPTING_MATRIX = 17,
+        MOTOR_FRAME_CUSTOME24_UB_DARPA_V2 = 18,
+        MOTOR_FRAME_CUSTOME22_UB_DARPA = 19,
     };
 
     // return string corresponding to frame_class

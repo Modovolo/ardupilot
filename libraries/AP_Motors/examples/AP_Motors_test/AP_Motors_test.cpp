@@ -174,6 +174,8 @@ void setup()
                     case AP_Motors::MOTOR_FRAME_QUAD:
                     case AP_Motors::MOTOR_FRAME_HEXA:
                     case AP_Motors::MOTOR_FRAME_OCTA:
+                    case AP_Motors::MOTOR_FRAME_CUSTOME24_UB_DARPA_V2:
+                    case AP_Motors::MOTOR_FRAME_CUSTOME22_UB_DARPA:
                         motors_matrix = new AP_MotorsMatrix(400);
                         motors = motors_matrix;
                         break;
@@ -353,7 +355,7 @@ void print_all_motors()
 
     first_layout = true;
 
-    for (uint8_t frame_class=0; frame_class <= AP_Motors::MOTOR_FRAME_DECA; frame_class++) {
+    for (uint8_t frame_class=0; frame_class <= AP_Motors::MOTOR_FRAME_CUSTOME22_UB_DARPA; frame_class++) {
         for (uint8_t frame_type=0; frame_type < AP_Motors::MOTOR_FRAME_TYPE_Y4; frame_type++) {
             if (frame_class == AP_Motors::MOTOR_FRAME_TRI) {
                 print_motor_tri(frame_class, frame_type);

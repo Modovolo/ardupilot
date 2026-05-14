@@ -371,6 +371,8 @@ void Copter::allocate_motors(void)
         case AP_Motors::MOTOR_FRAME_OCTAQUAD:
         case AP_Motors::MOTOR_FRAME_DODECAHEXA:
         case AP_Motors::MOTOR_FRAME_DECA:
+        case AP_Motors::MOTOR_FRAME_CUSTOME24_UB_DARPA_V2:
+        case AP_Motors::MOTOR_FRAME_CUSTOME22_UB_DARPA:
         case AP_Motors::MOTOR_FRAME_SCRIPTING_MATRIX:
         default:
             motors = NEW_NOTHROW AP_MotorsMatrix(copter.scheduler.get_loop_rate_hz());
