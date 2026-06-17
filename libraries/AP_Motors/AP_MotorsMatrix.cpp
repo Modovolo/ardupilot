@@ -1369,6 +1369,78 @@ bool AP_MotorsMatrix::setup_custome22_ub_darpa_matrix(motor_frame_type frame_typ
 #endif
 }
 
+bool AP_MotorsMatrix::setup_custome18_ub_darpa_matrix(motor_frame_type frame_type)
+{
+    (void)frame_type;
+    _mav_type = MAV_TYPE_GENERIC;
+    _frame_class_string = "CUSTOME18_UB_DARPA";
+
+#if AP_MOTORS_MAX_NUM_MOTORS < 18
+    _frame_type_string = "UNSUPPORTED";
+    return false;
+#else
+    _frame_type_string = "RAW18";
+    static const AP_MotorsMatrix::MotorDefRaw motors[] {
+        {  0.25f,   0.433f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW,  1 },
+        {  0.5f,    0.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CW,   2 },
+        {  0.25f,  -0.433f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW,  3 },
+        { -0.25f,  -0.433f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,   4 },
+        { -0.5f,    0.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CCW,  5 },
+        { -0.25f,   0.433f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,   6 },
+        {  0.0f,    0.866f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW,  7 },
+        {  0.5f,    0.866f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,   8 },
+        {  0.75f,   0.433f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,   9 },
+        {  1.0f,    0.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 10 },
+        {  0.75f,  -0.433f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 11 },
+        {  0.5f,   -0.866f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,  12 },
+        {  0.0f,   -0.866f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,  13 },
+        { -0.5f,   -0.866f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 14 },
+        { -0.75f,  -0.433f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 15 },
+        { -1.0f,    0.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CW,  16 },
+        { -0.75f,   0.433f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,  17 },
+        { -0.5f,    0.866f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 18 },
+    };
+    add_motors_raw(motors, ARRAY_SIZE(motors));
+    return true;
+#endif
+}
+
+bool AP_MotorsMatrix::setup_custome18_balanced_adj_matrix(motor_frame_type frame_type)
+{
+    (void)frame_type;
+    _mav_type = MAV_TYPE_GENERIC;
+    _frame_class_string = "CUSTOME18_BALANCED_ADJ";
+
+#if AP_MOTORS_MAX_NUM_MOTORS < 18
+    _frame_type_string = "UNSUPPORTED";
+    return false;
+#else
+    _frame_type_string = "RAW18";
+    static const AP_MotorsMatrix::MotorDefRaw motors[] {
+        {  0.25f,   0.433f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,   1 },
+        {  0.5f,    0.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CCW,  2 },
+        {  0.25f,  -0.433f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,   3 },
+        { -0.25f,  -0.433f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW,  4 },
+        { -0.5f,    0.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CW,   5 },
+        { -0.25f,   0.433f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW,  6 },
+        {  0.0f,    0.866f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW,  7 },
+        {  0.5f,    0.866f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,   8 },
+        {  0.75f,   0.433f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,   9 },
+        {  1.0f,    0.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 10 },
+        {  0.75f,  -0.433f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 11 },
+        {  0.5f,   -0.866f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,  12 },
+        {  0.0f,   -0.866f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,  13 },
+        { -0.5f,   -0.866f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 14 },
+        { -0.75f,  -0.433f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 15 },
+        { -1.0f,    0.0f,   AP_MOTORS_MATRIX_YAW_FACTOR_CW,  16 },
+        { -0.75f,   0.433f, AP_MOTORS_MATRIX_YAW_FACTOR_CW,  17 },
+        { -0.5f,    0.866f, AP_MOTORS_MATRIX_YAW_FACTOR_CCW, 18 },
+    };
+    add_motors_raw(motors, ARRAY_SIZE(motors));
+    return true;
+#endif
+}
+
 void AP_MotorsMatrix::setup_motors(motor_frame_class frame_class, motor_frame_type frame_type)
 {
     // remove existing motors
@@ -1419,6 +1491,12 @@ void AP_MotorsMatrix::setup_motors(motor_frame_class frame_class, motor_frame_ty
         break;
     case MOTOR_FRAME_CUSTOME22_UB_DARPA:
         success = setup_custome22_ub_darpa_matrix(frame_type);
+        break;
+    case MOTOR_FRAME_CUSTOME18_UB_DARPA:
+        success = setup_custome18_ub_darpa_matrix(frame_type);
+        break;
+    case MOTOR_FRAME_CUSTOME18_BALANCED_ADJ:
+        success = setup_custome18_balanced_adj_matrix(frame_type);
         break;
     default:
         // matrix doesn't support the configured class
